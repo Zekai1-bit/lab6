@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yellowknife, right now</title>
+<meta name="description" content="Live weather for Yellowknife, Northwest Territories, from the met.no Locationforecast API. The data drives the colour, sky, motion and sound of the page.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap" rel="stylesheet">
+
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-row">
+    <p class="eyebrow">Lab 6 · Working with API</p>
+    <nav aria-label="Site">
+      <a class="nav-link" href="references.html">References</a>
+    </nav>
+  </div>
+  <h1>Yellowknife, right now</h1>
+  <p class="lede">Live weather for Yellowknife, Northwest Territories (62.4540° N, 114.3718° W).
+    Temperature sets the colour of the page, cloud cover dims the aurora and hides the stars,
+    and wind speed sets how fast the snow drifts.</p>
+</header>
+
+<main>
+
+  <noscript>
+    <section class="panel notice" aria-label="JavaScript required">
+      <h2>JavaScript is turned off</h2>
+      <p>This page fetches live weather from the met.no API and updates itself with JavaScript.
+        Turn JavaScript on in your browser settings and reload to see the current conditions in Yellowknife.</p>
+    </section>
+  </noscript>
+
+  <figure class="sky">
+    <div class="sky-stage">
+
+      <img class="sky-photo" src="images/aurora-houses.jpg" width="6240" height="4160"
+        alt="Green aurora over snow-covered houses and trees at night">
+      <div class="sky-tint" aria-hidden="true"></div>
+      <div class="aurora" aria-hidden="true"></div>
+      <div class="stars" id="stars" aria-hidden="true"></div>
+      <div class="cloud-veil" aria-hidden="true"></div>
+      <div class="snow" id="snow" aria-hidden="true"></div>
+    </div>
+    <figcaption>Photo: Ken Cheung on <a href="https://www.pexels.com/photo/9995892/">Pexels</a></figcaption>
+  </figure>
+
+  <section class="controls" aria-label="Controls">
+    <button id="refreshBtn" class="btn btn-primary" type="button">Refresh</button>
+    <button id="unitBtn" class="btn" type="button" aria-pressed="false"
+      aria-label="Show temperature in Fahrenheit">Show °F</button>
+    <button id="soundBtn" class="btn" type="button" aria-pressed="false">Sound: off</button>
+  </section>
+
+  <section class="status" id="status" aria-live="polite">
+    <div class="loading is-hidden" id="loading">
+      <span class="spinner" aria-hidden="true"></span>
+      <span>Fetching live weather from met.no…</span>
+    </div>
+    <div class="error-card is-hidden" id="errorCard" role="alert">
+      <h2>Weather could not be loaded</h2>
+      <p id="errorMessage">Something went wrong.</p>
+      <button id="retryBtn" class="btn" type="button">Try again</button>
+    </div>
+  </section>
+
+  <section class="panel readings" aria-labelledby="now">
+    <h2 id="now" class="small-head">Current conditions</h2>
+
+    <div class="headline">
+      <p class="temperature" id="temperature">--</p>
+      <p class="condition" id="condition">Waiting for data</p>
+    </div>
+
+    <dl class="cards">
+      <div class="card">
+        <dt>Wind</dt>
+        <dd id="wind">--</dd>
+      </div>
+      <div class="card">
+        <dt>Cloud cover</dt>
+        <dd id="cloud">--</dd>
+      </div>
+      <div class="card">
+        <dt>Humidity</dt>
+        <dd id="humidity">--</dd>
+      </div>
+    </dl>
+
+    <dl class="times">
+      <div>
+        <dt>Data time (Yellowknife)</dt>
+        <dd id="dataTime">--</dd>
+      </div>
+      <div>
+        <dt>Last updated</dt>
+        <dd id="lastUpdated">--</dd>
+      </div>
+    </dl>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Lab 6 — Working with API · Zekai Wan</p>
+  <p>Data: <a href="https://api.met.no/weatherapi/locationforecast/2.0/documentation">MET Norway Locationforecast 2.0</a>
+    · Photo: Ken Cheung, Pexels · Sound: cobratronik and steffcaffrey, Freesound
+    · <a href="references.html">References</a></p>
+</footer>
+
+</body>
+</html>
